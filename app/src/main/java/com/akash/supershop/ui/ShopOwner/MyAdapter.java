@@ -32,18 +32,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
+
     public void setListener(MyAdapterItemClickListener listener) {
         this.listener = listener;
     }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        int id=datalist.get(position).getId();
-        String name=datalist.get(position).getName();
-        holder.pro_id.setText(""+id);
-        holder.pro_name.setText(""+name);
-        holder.pro_category.setText(""+datalist.get(position).getCategory());
-        holder.pro_descrip.setText(""+datalist.get(position).getDescription());
-        holder.pro_price.setText(""+datalist.get(position).getPrice());
+        holder.pro_id.setText("Product Id  "+datalist.get(position).getId());
+        holder.pro_name.setText("Product Name  "+datalist.get(position).getName());
+        holder.pro_category.setText("Product Category  "+datalist.get(position).getCategory());
+        holder.pro_descrip.setText("Product description  "+datalist.get(position).getDescription());
+        holder.pro_price.setText("Product Price  "+datalist.get(position).getPrice()+" Tk");
         holder.cardViewLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

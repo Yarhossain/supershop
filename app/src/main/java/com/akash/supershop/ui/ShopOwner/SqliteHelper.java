@@ -24,20 +24,20 @@ public class SqliteHelper extends SQLiteOpenHelper {
 
 
 
-    public void save(int pro_id,String name, String category, String description, String price){
+    public void save(String name, String category, String description, int price){
         ContentValues values = new ContentValues();
         values.put(TABLE1_COL2,name);
         values.put(TABLE1_COL3,category);
         values.put(TABLE1_COL4,description);
-        values.put(TABLE1_COL4,price);
+        values.put(TABLE1_COL5,price);
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE1,null,values);
 
 
     }
-    public List<Product> getAllStudent()
+    public List<Product> getAllProducts()
     {
-        List<Product> students=new ArrayList<>();
+        List<Product> products=new ArrayList<>();
         String sql="SELECT * FROM "+TABLE1+" ORDER BY "+TABLE1_COL1+" DESC";
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor=db.rawQuery(sql,null);
@@ -52,15 +52,15 @@ public class SqliteHelper extends SQLiteOpenHelper {
                 String description=cursor.getString(cursor.getColumnIndex(TABLE1_COL4));
                 String price=cursor.getString(cursor.getColumnIndex(TABLE1_COL5));
                 try {
-                    Product strings = new Product(Integer.parseInt(id), name, category, description, 600);
-                    students.add(strings);
+                    Product strings = new Product(Integer.parseInt(id), name, category, description, Integer.parseInt(price));
+                    products.add(strings);
                 }catch (Exception e)
                 {
 
                 }
             }
         }
-        return students;
+        return products;
     }
 
     @Override
@@ -77,6 +77,24 @@ public class SqliteHelper extends SQLiteOpenHelper {
         onCreate(db);
 
     }
+    public void update(Product product){
+        int id=product.getId();
+        String name = product.getName();
+        String category = product.getCategory();
+        String description = product.getDescription();
+        int price = product.getPrice();
+
+        ContentValues values=new ContentValues();
+        values.put(TABLE1_COL2,""+name);
+        values.put(TABLE1_COL3,""+category);
+        values.put(TABLE1_COL4,""+description);
+        values.put(TABLE1_COL5,""+price);
+
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.update(TABLE1,values,""+TABLE1_COL1+" = ?",new String[]{""+id});
+
+    }
+
 
     public void delete(int id)
     {

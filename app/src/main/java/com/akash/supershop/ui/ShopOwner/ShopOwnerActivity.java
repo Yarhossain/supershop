@@ -31,12 +31,14 @@ public class ShopOwnerActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_owner);
+
         recyclerView = findViewById(R.id.recycler_view);
         product_name = findViewById(R.id.product_name);
         product_category = findViewById(R.id.product_category);
         product_description= findViewById(R.id.product_description);
         product_price = findViewById(R.id.product_price);
         addbtn = findViewById(R.id.addbtn);
+
         addbtn.setOnClickListener(this);
         strings = new ArrayList<>();
         myAdapter = new MyAdapter(strings);
@@ -52,7 +54,7 @@ public class ShopOwnerActivity extends AppCompatActivity implements View.OnClick
 
     private void showList() {
         strings.clear();
-        strings.addAll(dphelper.getAllStudent());
+        strings.addAll(dphelper.getAllProducts());
         myAdapter.notifyDataSetChanged();
     }
 
@@ -62,14 +64,44 @@ public class ShopOwnerActivity extends AppCompatActivity implements View.OnClick
         String pro_category = product_category.getText().toString().trim();
         String pro_description = product_description.getText().toString().trim();
         String pro_price = product_price.getText().toString().trim();
-        //  strings.add(var);
-        //  myAdapter.notifyDataSetChanged();
-        dphelper.save(1,pro_name,pro_category,pro_description,pro_price);
-        Toast.makeText(ShopOwnerActivity.this,"Data Saved",Toast.LENGTH_SHORT).show();
-        product_name.setText("");
-        product_category.setText("");
-        product_description.setText("");
-        product_price.setText("");
+        if(!pro_name.isEmpty() && !pro_category.isEmpty() && !pro_price.isEmpty() && !pro_description.isEmpty()){
+
+            if(toUpdate==0)
+            {
+                dphelper.save(pro_name,pro_category,pro_description,Integer.parseInt(pro_price));
+            }
+            else {
+
+                dphelper.update(new Product(toUpdate,pro_name,pro_category,pro_description,Integer.parseInt(pro_price)));
+                toUpdate=0;
+
+            }
+            showList();
+            Toast.makeText(ShopOwnerActivity.this,"Data Saved",Toast.LENGTH_SHORT).show();
+            clearAll();
+
+        }
+        else {
+            if(pro_name.isEmpty())
+            {
+                product_name.setError("this field is empty");
+            }
+            if(pro_description.isEmpty())
+            {
+                product_description.setError("this field is empty");
+            }
+            if(pro_category.isEmpty())
+            {
+                product_category.setError("this field is empty");
+            }
+            if(pro_price.isEmpty())
+            {
+                product_price.setError("this field is empty");
+            }
+
+
+        }
+
 
     }
 
@@ -88,5 +120,12 @@ public class ShopOwnerActivity extends AppCompatActivity implements View.OnClick
     public void onItemLongClick(Product item, int position) {
         dphelper.delete(item.getId());
         showList();
+    }
+    public void clearAll()
+    {
+        product_name.setText("");
+        product_category.setText("");
+        product_description.setText("");
+        product_price.setText("");
     }
 }

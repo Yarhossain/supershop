@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ShopOwner.ShopOwnerActivity"
-            android:theme="@style/AppTheme.Fullscreen">
+        <activity android:name=".ui.ShopOwner.ShopOwnerActivity">
 
         </activity>
-        <activity android:name=".ui.Login.LoginActivity"
-            android:theme="@style/AppTheme.Fullscreen">  </activity>
+        <activity android:name=".ui.Login.LoginActivity">
+
+        </activity>
         <activity android:name=".ui.Splash.SplashActivity"
             android:theme="@style/AppTheme.Fullscreen">
             <intent-filter>
