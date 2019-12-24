@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/email_edit_text"
             android:layout_width="280dp"
             android:layout_height="40dp"
             android:layout_marginBottom="20dp"
@@ -33,7 +33,7 @@
             android:textSize="17dp" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/password_edit_text"
             android:layout_width="280dp"
             android:layout_height="40dp"
             android:layout_marginBottom="16dp"
@@ -47,7 +47,7 @@
             android:textSize="17dp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/loginbtn"
             android:layout_width="280dp"
             android:layout_height="40dp"
             android:layout_marginBottom="16dp"
@@ -58,13 +58,13 @@
             android:textAllCaps="false" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/forget_pass_edittext"
             android:layout_width="166dp"
             android:layout_height="15dp"
 
             android:text="Forgot Your Password? Click Here"
             android:textColor="#636363"
-            android:textSize="10sp" />
+            android:textSize="13sp" />
 
 
     </LinearLayout>
